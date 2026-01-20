@@ -1,5 +1,6 @@
 package praktikum;
 
+import org.assertj.core.api.SoftAssertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -70,7 +71,11 @@ public class BurgerTest {
         burger.ingredients.add(mockIngredient2);
         burger.ingredients.add(mockIngredient3);
         burger.moveIngredient(0, 2);
-        assertTrue(burger.ingredients.get(0).equals(mockIngredient3) || burger.ingredients.get(2).equals(mockIngredient));
+        SoftAssertions softly = new SoftAssertions();
+        softly.assertThat(burger.ingredients.get(0)).isEqualTo(mockIngredient2);
+        softly.assertThat(burger.ingredients.get(1)).isEqualTo(mockIngredient3);
+        softly.assertThat(burger.ingredients.get(2)).isEqualTo(mockIngredient);
+        softly.assertAll();
     }
 
 }
